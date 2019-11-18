@@ -20,6 +20,10 @@ export default (state = defaultState, action) => {
             newState.inputValue = ''
             return newState
         break
+        case 'delItem':
+            newState.list.splice(action.index, 1)
+            return newState
+        break
     }
     return state
 }

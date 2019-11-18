@@ -30,12 +30,14 @@ export default class TodoList extends Component {
                 </div>
                 <div style={{marginTop:"10px", width:"500px"}}>
                     <List
-                        header={<div>Header</div>}
+                        header={<div>我就是列表的头部</div>}
                         footer={<div>Footer</div>}
                         bordered
                         dataSource={this.state.list}
-                        renderItem={item => (
-                            <List.Item>
+                        renderItem={(item, index) => (
+                            <List.Item
+                                onClick={()=>{this.delItem(index)}}
+                            >
                                 {item}
                             </List.Item>
                         )}
@@ -56,6 +58,15 @@ export default class TodoList extends Component {
             type: 'addItem'
         }
         store.dispatch(action)
+    }
+    delItem = (index) => {
+        console.log(index)
+        const action = {
+            type: 'delItem',
+            index
+        }
+        store.dispatch(action)
+
     }
     storeChange = () => {
         this.setState(store.getState())
