@@ -8,6 +8,7 @@ export default class TodoList extends Component {
         super(props)
         this.state  = store.getState()
         console.log(this.state)
+        store.subscribe(this.storeChange)
     }
     render() {
         return (
@@ -16,12 +17,16 @@ export default class TodoList extends Component {
                     <Input 
                         placeholder={this.state.placeHolder}
                         style={{width: '400px', marginRight:'10px'}}
+                        value={this.state.inputValue}
+                        onChange={this.changeInputValue}
                     />
                     <Button
                         type='primary'
+                        onClick={this.clickBtn}
                     >
                         按钮
                     </Button>
+                    {this.state.inputValue}
                 </div>
                 <div style={{marginTop:"10px", width:"500px"}}>
                     <List
@@ -38,5 +43,21 @@ export default class TodoList extends Component {
                 </div>
             </div>
         )
+    }
+    changeInputValue = (e) => {
+        const action = {
+            type: 'changeInput',
+            value: e.target.value
+        }
+        store.dispatch(action)
+    }
+    clickBtn = () => {
+        const action = {
+            type: 'addItem'
+        }
+        store.dispatch(action)
+    }
+    storeChange = () => {
+        this.setState(store.getState())
     }
 }
