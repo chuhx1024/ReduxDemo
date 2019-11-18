@@ -1,14 +1,10 @@
-import {CHANGE_INPUT, ADD_ITEM, DEL_ITEM} from './actionTypes'
+import {CHANGE_INPUT, ADD_ITEM, DEL_ITEM, GET_LIST} from './actionTypes'
 // import abc from './actionTypes'
 // let {CHANGE_INPUT, ADD_ITEM, DEL_ITEM} = abc
 const defaultState = {
     placeHolder: 'Write something',
     inputValue: '我是默认值',
-    list: [
-        '早会',
-        '阿达',
-        '那斯蒂芬'
-    ]
+    list: []
 }
 export default (state = defaultState, action) => {
     let {type} = action
@@ -25,6 +21,10 @@ export default (state = defaultState, action) => {
         break
         case DEL_ITEM:
             newState.list.splice(action.index, 1)
+            return newState
+        break
+        case GET_LIST:
+            newState.list = action.data
             return newState
         break
     }

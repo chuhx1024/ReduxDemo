@@ -30,7 +30,7 @@ const TodoListUI = (props) => {
                         <List.Item
                             onClick={()=>{props.delItem(index)}}
                         >
-                            {item}
+                            {item.title}
                         </List.Item>
                     )}
                 />
