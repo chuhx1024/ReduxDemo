@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import 'antd/dist/antd.css'
-import {Input, Button,List} from 'antd'
+
 import store from './store'
 import {changeInputAction, addItemAction, delItemAction} from './store/actionCreators'
+import TodoListUI from './TodoListUI'
 
 export default class TodoList extends Component {
     constructor (props) {
@@ -13,38 +13,14 @@ export default class TodoList extends Component {
     }
     render() {
         return (
-            <div style={{margin: '10px'}}>
-                <div>
-                    <Input 
-                        placeholder={this.state.placeHolder}
-                        style={{width: '400px', marginRight:'10px'}}
-                        value={this.state.inputValue}
-                        onChange={this.changeInputValue}
-                    />
-                    <Button
-                        type='primary'
-                        onClick={this.clickBtn}
-                    >
-                        按钮
-                    </Button>
-                    {this.state.inputValue}
-                </div>
-                <div style={{marginTop:"10px", width:"500px"}}>
-                    <List
-                        header={<div>我就是列表的头部</div>}
-                        footer={<div>Footer</div>}
-                        bordered
-                        dataSource={this.state.list}
-                        renderItem={(item, index) => (
-                            <List.Item
-                                onClick={()=>{this.delItem(index)}}
-                            >
-                                {item}
-                            </List.Item>
-                        )}
-                    />
-                </div>
-            </div>
+           <TodoListUI
+                placeHolder={this.state.placeHolder}
+                inputValue={this.state.inputValue}
+                changeInputValue={this.changeInputValue}
+                clickBtn={this.clickBtn}
+                list={this.state.list}
+                delItem={this.delItem}
+           />
         )
     }
     changeInputValue = (e) => {
