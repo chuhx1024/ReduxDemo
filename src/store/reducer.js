@@ -15,7 +15,8 @@ export default (state = defaultState, action) => {
             return newState
         break
         case ADD_ITEM:
-            newState.list.push(newState.inputValue)
+            let temp = {title: newState.inputValue}
+            newState.list.push(temp)
             newState.inputValue = ''
             return newState
         break
