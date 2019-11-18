@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css'
 import {Input, Button,List} from 'antd'
-
-const data = [
-    '早会',
-    '阿达',
-    '那斯蒂芬'
-]
+import store from './store'
 
 export default class TodoList extends Component {
+    constructor (props) {
+        super(props)
+        this.state  = store.getState()
+        console.log(this.state)
+    }
     render() {
         return (
             <div style={{margin: '10px'}}>
                 <div>
                     <Input 
-                        placeholder="write"
+                        placeholder={this.state.placeHolder}
                         style={{width: '400px', marginRight:'10px'}}
                     />
                     <Button
@@ -28,7 +28,7 @@ export default class TodoList extends Component {
                         header={<div>Header</div>}
                         footer={<div>Footer</div>}
                         bordered
-                        dataSource={data}
+                        dataSource={this.state.list}
                         renderItem={item => (
                             <List.Item>
                                 {item}
